@@ -1,0 +1,61 @@
+@media screen and (max-width: 1024px) {
+
+    .header {
+        background: white;
+    }
+
+    .sign-up {
+        background: white;
+        padding: 45px 0 0;
+    }
+
+    .sign-up__container {
+        flex-direction: column;
+        padding: 0;
+    }
+
+    .form-sign-up {
+        padding: 0;
+    }
+
+    .sign-up__form-container {
+        margin-bottom: 50px;
+        padding: 0 15px;
+    }
+
+    .form-sign-up__btn {
+        margin-bottom: 20px;
+    }
+
+    .sign-up__image {
+        background: #F8F8FA;
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .popup__content {
+        height: 300px;
+        width: 90%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .form-sign-up__title {
+        font-size: 28px;
+        margin-bottom: 17px;
+    }
+
+    .form-sign-up__subtitle {
+        font-size: 18px;
+        line-height: 25px;
+        margin-bottom: 30px;
+    }
+
+}
+
+@media screen and (max-width: 425px) {
+    .sign-up {
+        padding: 20px 0 0;
+    }
+}
