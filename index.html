@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="src/css/styles.css">
+    <link rel="stylesheet" href="src/css/adaptive.css">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:wght@700&display=swap" rel="stylesheet">
     <title>HomeWorks</title>
 </head>
@@ -10,37 +12,48 @@
 <header class="header">
     <div class="header__container container">
         <div class="header__logo logo">
-            <a href="#"><img src="public/images/logo.png" alt="Логотип"></a>
+            <a href="#"><img src="images/logo.png" alt="Логотип"></a>
         </div>
     </div>
 </header>
 <section class="sign-up">
     <div class="sign-up__container container">
         <div class="sign-up__form-container">
-        <form action="#" class="sign-up__form form-sign-up">
-            <h1 class="form-sign-up__title">Get your free account</h1>
-            <p class="form-sign-up__subtitle">Try homeWorks BUSINESS free for 15 days. Downgrade to Basic (Free Forever)
-                anytime.</p>
-            <label for="fullname"  class="form-sign-up__label form-sign-up__label_remove">Full Name</label>
-            <input type="text" class="form-sign-up__input-text" id="fullname">
-            <label for="username" class="form-sign-up__label">Your username</label>
-            <input type="text" class="form-sign-up__input-text" id="username">
-            <label for="email" class="form-sign-up__label form-sign-up__label_remove">E-mail</label>
-            <input type="email" class="form-sign-up__input-text" id="email">
-            <label for="password" class="form-sign-up__label">Password</label>
-            <input type="password" class="form-sign-up__input-text" id="password">
-            <label for="repeatPassword" class="form-sign-up__label form-sign-up__label_remove">Repeat Password</label>
-            <input type="password" class="form-sign-up__input-text" id="repeatPassword">
-            <div class="form-sign-up__agree">
-            <input type="checkbox" class="form-sign-up__input-agree" id="agree" checked>
-            <label for="agree" class="form-sign-up__label form-sign-up__label_agree">Agree to our Terms of Service and Privacy Statement</label>
-            </div>
-            <button class="form-sign-up__btn btn">Sign up</button>
-        </form>
-        <a href="#" class="sign-up__link">Already have an account?</a>
+            <form action="#" class="sign-up__form form-sign-up">
+                <h1 class="form-sign-up__title">Get your free account</h1>
+                <p class="form-sign-up__subtitle">Try homeWorks BUSINESS free for 15 days. Downgrade to Basic (Free
+                    Forever)
+                    anytime.</p>
+                <label for="fullname" class="form-sign-up__label form-sign-up__label_remove">Full Name</label>
+                <input type="text" class="form-sign-up__input-text" id="fullname">
+                <div class="error__container"></div>
+                <label for="username" class="form-sign-up__label">Your username</label>
+                <input type="text" class="form-sign-up__input-text" id="username">
+                <div class="error__container"></div>
+                <label for="email" class="form-sign-up__label form-sign-up__label_remove">E-mail</label>
+                <input type="text" class="form-sign-up__input-text" id="email">
+                <div class="error__container"></div>
+                <label for="password" class="form-sign-up__label">Password</label>
+                <input type="password" class="form-sign-up__input-text" id="password">
+                <div class="error__container"></div>
+                <label for="repeatPassword" class="form-sign-up__label form-sign-up__label_remove">Repeat
+                    Password</label>
+                <input type="password" class="form-sign-up__input-text" id="repeatPassword">
+                <div class="error__container"></div>
+                <div class="form-sign-up__agree">
+                    <div class="form-sign-up__agree-container">
+                        <input type="checkbox" class="form-sign-up__input-agree" id="agree" checked>
+                        <label for="agree" class="form-sign-up__label form-sign-up__label_agree">Agree to our Terms of
+                            Service and Privacy Statement</label>
+                    </div>
+                    <div class="error__container">You must agree to our Terms of Service and Privacy Statement</div>
+                </div>
+                <a href="#" class="form-sign-up__btn btn">Sign up</a>
+            </form>
+            <a href="#" class="sign-up__link">Already have an account?</a>
         </div>
         <div class="sign-up__image">
-            <img class="sign-up__img" src="public/images/image.png" alt="Sign up">
+            <img class="sign-up__img" src="images/image.png" alt="Sign up">
         </div>
     </div>
 </section>
@@ -50,6 +63,7 @@
         <button class="popup__btn btn">ОК</button>
     </div>
 </div>
-<script type="module" src="./src/js/script.js"></script>
+<script type="module" src="src/js/script.js"></script>
+</body>
 </body>
 </html>

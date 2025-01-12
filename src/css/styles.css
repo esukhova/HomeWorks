@@ -63,11 +63,21 @@ a {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 50%;
     width: 50%;
     gap: 30px;
     border-radius: 30px;
     font-size: 20px;
+}
+
+
+.error__container {
+    color: #c72424;
+    margin-bottom: 20px;
+    display: none;
+}
+
+.show {
+    display: block;
 }
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -132,6 +142,7 @@ a {
     font-size: 20px;
     color: #323232;
     margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .form-sign-up__input-text::placeholder {
@@ -139,9 +150,13 @@ a {
 }
 
 .form-sign-up__agree {
+    margin-bottom: 30px;
+}
+
+.form-sign-up__agree-container {
     display: flex;
     align-items: center;
-    margin-bottom: 40px;
+    margin-bottom: 10px;
 }
 
 .form-sign-up__input-agree {
@@ -152,10 +167,13 @@ a {
     width: 210px;
     align-self: center;
     margin-bottom: 44px;
+    text-align: center;
+    display: block;
 }
 
 .sign-up__link {
     align-self: center;
+    margin-right: 30px;
 }
 
 .sign-up__image {
@@ -167,4 +185,8 @@ a {
 
 .sign-up__img {
     max-width: 100%;
+}
+
+.error-input {
+    border: 2px solid #c72424;;
 }

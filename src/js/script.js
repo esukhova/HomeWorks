@@ -1,7 +1,5 @@
-import "../css/styles.css";
-import "../css/adaptive.css";
-
 window.onload = function () {
+    let title = document.getElementsByClassName('form-sign-up__title')[0];
     let fullName = document.getElementById('fullname');
     let userName = document.getElementById('username');
     let email = document.getElementById('email');
@@ -15,10 +13,33 @@ window.onload = function () {
     let signUpLink = document.getElementsByClassName('sign-up__link')[0];
 
 
+    let inputs = document.getElementsByClassName('form-sign-up__input-text');
+    let errors = document.querySelectorAll('.error__container');
+
+    let clientsArray = [];
+    let clients = localStorage.getItem('clients');
+    if(clients) {
+        clientsArray = JSON.parse(clients);
+    }
+
+    const fullNames = clientsArray.map(el => el.fullName);
+    const userNames = clientsArray.map(el => el.userName);
+    const passwords = clientsArray.map(el => el.password);
+    // console.log(fullNames);
+    // console.log(userNames);
+    // console.log(passwords);
+
+    let indexOfUserName;
+
     function changePage() {
-        document.getElementsByClassName('form-sign-up__title')[0].innerText = 'Log in to the system';
+        title.innerText = 'Log in to the system';
+        userName.value = '';
+        password.value = '';
+        fullName.nextElementSibling.remove();
         fullName.remove();
+        email.nextElementSibling.remove();
         email.remove();
+        repeatPassword.nextElementSibling.remove();
         repeatPassword.remove();
         let labelToRemoveLength = labelToRemove.length;
         for (let i = 0; i < labelToRemoveLength; i++) {
@@ -26,75 +47,149 @@ window.onload = function () {
         }
         agreeBlock.remove();
         signUpBtn.innerText = 'Sign In';
-        signUpLink.remove();
+        signUpLink.innerText='Registration';
+
+        signUpLink.onclick = () => {
+            location.reload();
+        }
 
         signUpBtn.onclick = () => {
-            if (!userName.value) {
-                alert('Заполните поле Your username');
-                return;
+            for (let i=0; i<errors.length; i++) {
+                errors[i].classList.remove('show');
             }
-            if (password.value.length < 8) {
-                alert('Пароль должен содержать не менее 8 символов');
-                return;
+
+            for (let i=0; i<inputs.length; i++) {
+                if (!inputs[i].value) {
+                    inputs[i].classList.add('error-input');
+                    inputs[i].nextElementSibling.classList.add('show');
+                    inputs[i].nextElementSibling.innerText = 'Fill in the field ' + inputs[i].id;
+                    return;
+                } else {
+                    inputs[i].classList.remove('error-input');
+                    inputs[i].nextElementSibling.classList.remove('show');
+                }
             }
-            alert('Добро пожаловать, ' + userName.value + '!');
+
+            if (userName.value && password.value) {
+                if (!userNames.includes(userName.value)) {
+                    userName.classList.add('error-input');
+                    userName.nextElementSibling.classList.add('show');
+                    userName.nextElementSibling.innerText = 'This user is not registered';
+                } else {
+                    indexOfUserName = userNames.indexOf(userName.value);
+                    if (passwords[indexOfUserName] !== (password.value)) {
+                        password.classList.add('error-input');
+                        password.nextElementSibling.classList.add('show');
+                        password.nextElementSibling.innerText = 'Incorrect password';
+
+                    } else {
+                        password.classList.remove('error-input');
+                        changePage2();
+                    }
+                }
+            }
         }
     }
 
 
-    fullName.onkeydown = (e) => {
-        if (!isNaN(parseInt(e.key))) {
-            return false;
+    function changePage2() {
+        title.innerText = 'Welcome, ' + fullNames[indexOfUserName] + '!';
+        title.nextElementSibling.remove();
+        signUpBtn.innerText = 'Exit';
+        userName.previousElementSibling.remove();
+        userName.remove();
+        password.previousElementSibling.remove();
+        password.remove();
+        signUpLink.remove();
+        document.getElementsByClassName('sign-up__container')[0].style.alignItems = 'flex-start';
+        signUpBtn.onclick = () => {
+            location.reload();
         }
-    }
-    userName.onkeydown = (e) => {
-        if ((e.key) === ',' || (e.key) === '.') {
-            return false;
-        }
-    }
-
-    agree.onchange = (e) => {
-        console.log(e.target.checked ? 'Согласен' : 'Не согласен');
     }
 
     signUpBtn.onclick = () => {
 
-        if (!fullName.value) {
-            alert('Заполните поле Full Name');
+        for (let i=0; i<errors.length; i++) {
+            errors[i].classList.remove('show');
+        }
+
+        for (let i=0; i<inputs.length; i++) {
+            inputs[i].classList.remove('error-input');
+        }
+
+
+        if (!/^[A-Z][a-z]+\s*(\s[A-Z][a-z]+\s*)*$/.test(fullName.value)) {
+            fullName.classList.add('error-input');
+            fullName.nextElementSibling.classList.add('show');
+            if (!fullName.value) {
+                fullName.nextElementSibling.innerText = 'Fill in the field Full Name';
+            } else {
+                fullName.nextElementSibling.innerText = 'The field Full Name can only contain english letters and space, and words in it must begin with a capital letter';
+            }
             return;
         }
-        if (!userName.value) {
-            alert('Заполните поле Your username');
+
+        if (!/^[A-Za-z\d_-]+$/.test(userName.value)) {
+            userName.classList.add('error-input');
+            userName.nextElementSibling.classList.add('show');
+            if (!userName.value) {
+                userName.nextElementSibling.innerText = 'Fill in the field Your Name';
+            } else {
+                userName.nextElementSibling.innerText = 'The field Your Name can only contain letters, numbers, underscore and dashes';
+            }
             return;
         }
-        if (!email.value) {
-            alert('Заполните поле E-mail');
+
+        if (!/^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,6}$/.test(email.value)) {
+            email.classList.add('error-input');
+            email.nextElementSibling.classList.add('show');
+            if (!email.value) {
+                email.nextElementSibling.innerText = 'Fill in the field E-mail';
+            } else {
+                email.nextElementSibling.innerText = 'Enter a valid e-mail';
+            }
             return;
         }
-        if (email.checkValidity() === false) {
-            alert('Исправьте E-mail');
+
+        if (!/(?=.*\d)(?=.*[^\s\w])(?=.*[A-Z]).{8,}/.test(password.value)) {
+            password.classList.add('error-input');
+            password.nextElementSibling.classList.add('show');
+            if (!password.value) {
+                password.nextElementSibling.innerText = 'Fill in the field Password';
+            } else {
+                password.nextElementSibling.innerText = 'The field Password must contain at least 8 characters, including at least one uppercase letter, one digit and one special character';
+            }
             return;
         }
-        if (!password.value) {
-            alert('Заполните поле Password');
-            return;
-        }
-        if (password.value.length < 8) {
-            alert('Пароль должен содержать не менее 8 символов');
-            return;
-        }
+
         if (!repeatPassword.value) {
-            alert('Заполните поле Repeat Password');
+            repeatPassword.classList.add('error-input');
+            repeatPassword.nextElementSibling.classList.add('show');
+            repeatPassword.nextElementSibling.innerText = 'Fill in the field Repeat Password';
+            return;
+        } else  if (password.value !== repeatPassword.value) {
+            repeatPassword.classList.add('error-input');
+            repeatPassword.nextElementSibling.classList.add('show');
+            repeatPassword.nextElementSibling.innerText = 'Password and Repeat Password must match';
             return;
         }
-        if (password.value !== repeatPassword.value) {
-            alert('Пароли должны совпадать');
-            return;
-        }
+
+
         if (!agree.checked) {
-            alert('Согласитесь с нашими Условиями предоставления услуг и Положением о конфиденциальности');
+            agree.parentElement.nextElementSibling.classList.add('show');
             return;
         }
+
+        let client = {
+            fullName: fullName.value,
+            userName: userName.value,
+            email: email.value,
+            password: password.value
+        };
+
+        clientsArray.push(client);
+        localStorage.setItem('clients', JSON.stringify(clientsArray));
+        console.log(localStorage);
 
         popup.style.display='flex';
         popup.classList.add('popup_open');
@@ -102,7 +197,6 @@ window.onload = function () {
 
     document.getElementsByClassName('popup__btn')[0].onclick = () => {
         fullName.value = '';
-        userName.value = '';
         userName.value = '';
         email.value = '';
         password.value = '';
